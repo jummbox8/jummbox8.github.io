@@ -1,0 +1,324 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BestKato - Chat with friends!</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #e9eef5;
+  font-family: Verdana, sans-serif;
+  color: #333;
+}
+
+/* HEADER AND LOGO */
+header {
+  background: linear-gradient(#75baf4, #287ac4);
+  padding: 18px;
+  border-bottom: 4px solid #15599c;
+}
+
+.logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-icon {
+  width: 70px;
+  height: 47px;
+}
+
+.logo-text {
+  font-family: "Trebuchet MS", sans-serif;
+  font-size: 38px;
+  font-weight: bold;
+  text-shadow: 1px 2px 2px #174b80;
+}
+
+.best { color: #2F7FD9; }
+.kato { color: #FF8A1F; }
+
+.tagline {
+  color: white;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+/* NAVIGATION */
+nav {
+  background: #2469aa;
+  padding: 12px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin-right: 20px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* MAIN CONTENT */
+main {
+  max-width: 850px;
+  margin: 20px auto;
+  padding: 10px;
+}
+
+.panel {
+  background: white;
+  border: 1px solid #bdcddd;
+  border-radius: 5px;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.panel-title {
+  background: #d8e9fa;
+  color: #245e94;
+  padding: 12px;
+  font-weight: bold;
+  border-bottom: 1px solid #bdcddd;
+}
+
+.content {
+  padding: 15px;
+}
+
+/* INPUTS AND BUTTONS */
+input {
+  padding: 11px;
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  max-width: 100%;
+  margin: 4px 0;
+}
+
+button {
+  padding: 11px 17px;
+  background: #347fc1;
+  color: white;
+  border: 1px solid #24639a;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #24639a;
+}
+
+/* CHAT */
+#messages {
+  height: 220px;
+  overflow-y: auto;
+  background: #f7faff;
+  border: 1px solid #d4dfeb;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.message {
+  padding: 7px;
+  border-bottom: 1px solid #eee;
+  overflow-wrap: anywhere;
+}
+
+.username {
+  color: #2874b9;
+  font-weight: bold;
+}
+
+#chatInput {
+  width: 72%;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #718096;
+  font-size: 12px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- BESTKATO LOGO -->
+<header>
+  <div class="logo-wrap">
+
+    <svg class="logo-icon" viewBox="0 0 90 60"
+         xmlns="http://www.w3.org/2000/svg">
+
+      <!-- White left chat bubble -->
+      <path d="M10 12 C10 6 16 4 26 4 H42
+      C52 4 58 10 58 20 C58 30 52 36 42 36
+      H28 L18 46 L20 36 C14 34 10 28 10 20 Z"
+      fill="white" stroke="#2F7FD9" stroke-width="3"/>
+
+      <!-- Orange right chat bubble -->
+      <path d="M38 20 C38 14 44 10 54 10 H70
+      C80 10 86 16 86 26 C86 36 80 42 70 42
+      H60 L66 54 L50 42 C44 40 38 34 38 26 Z"
+      fill="#FF8A1F" stroke="#E06A00" stroke-width="3"/>
+
+    </svg>
+
+    <div>
+      <div class="logo-text">
+        <span class="best">Best</span><span class="kato">Kato</span>
+      </div>
+      <div class="tagline">Chat with friends. Make new memories.</div>
+    </div>
+
+  </div>
+</header>
+
+<!-- NAVIGATION -->
+<nav>
+  <a href="#">Home</a>
+  <a href="#account">Account</a>
+  <a href="#chat">Chat</a>
+  <a href="#about">About</a>
+</nav>
+
+<main>
+
+<!-- WELCOME -->
+<div class="panel">
+  <div class="panel-title">Welcome to BestKato!</div>
+  <div class="content">
+    Welcome to your new favorite place to chat!
+
+    <p>Meet friends and enjoy the classic internet.</p>
+    <b>BestKato Classic • Est. 2008</b>
+  </div>
+</div>
+
+<!-- ACCOUNT -->
+<div class="panel" id="account">
+  <div class="panel-title">Your Account</div>
+  <div class="content">
+
+    <div id="loggedOut">
+      <p>Enter a username to join the website.</p>
+      <input id="username" placeholder="Your username">
+      <button onclick="login()">Join BestKato</button>
+      <p id="status">Not logged in.</p>
+    </div>
+
+    <div id="loggedIn" hidden>
+      <p id="welcomeUser"></p>
+      <button onclick="logout()">Log Out</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- PUBLIC CHAT -->
+<div class="panel" id="chat">
+  <div class="panel-title">Public Chat Room</div>
+  <div class="content">
+
+    <div id="messages">
+      <div class="message">
+        <span class="username">BestKato</span>: Welcome!
+      </div>
+    </div>
+
+    <input id="chatInput" placeholder="Write a message...">
+    <button onclick="sendMessage()">Send</button>
+
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="panel" id="about">
+  <div class="panel-title">About BestKato</div>
+  <div class="content">
+    BestKato is a classic-inspired chat website.
+
+    <p>First era: 2008–2013</p>
+    <p>Connect. Chat. Make friends.</p>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  BestKato Classic © 2008–2013
+</footer>
+
+<script>
+let currentUser = localStorage.getItem("bestkato_user") || "";
+
+function updateAccount() {
+  document.getElementById("loggedOut").hidden = !!currentUser;
+  document.getElementById("loggedIn").hidden = !currentUser;
+
+  if (currentUser) {
+    document.getElementById("welcomeUser").textContent =
+      "Welcome back, " + currentUser + "!";
+  }
+}
+
+function login() {
+  const name = document.getElementById("username").value.trim();
+
+  if (!name) {
+    alert("Enter a username!");
+    return;
+  }
+
+  currentUser = name;
+  localStorage.setItem("bestkato_user", currentUser);
+  updateAccount();
+}
+
+function logout() {
+  currentUser = "";
+  localStorage.removeItem("bestkato_user");
+  updateAccount();
+}
+
+function sendMessage() {
+  if (!currentUser) {
+    alert("Please join BestKato first!");
+    return;
+  }
+
+  const input = document.getElementById("chatInput");
+  const message = input.value.trim();
+
+  if (!message) return;
+
+  const div = document.createElement("div");
+  div.className = "message";
+
+  const name = document.createElement("span");
+  name.className = "username";
+  name.textContent = currentUser;
+
+  div.append(name, document.createTextNode(": " + message));
+
+  document.getElementById("messages").appendChild(div);
+  input.value = "";
+
+  const box = document.getElementById("messages");
+  box.scrollTop = box.scrollHeight;
+}
+
+updateAccount();
+</script>
+
+</body>
+</html>
